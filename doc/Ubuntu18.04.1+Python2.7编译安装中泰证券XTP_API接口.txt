@@ -1,0 +1,36 @@
+# deb cdrom:[Ubuntu 18.04.1 LTS _Bionic Beaver_ - Release amd64 (20180725)]/ bionic main restricted
+
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic main restricted universe multiverse
+deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse
+deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse
+deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted universe multiverse
+deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse
+deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse
+
+1.修改源
+sudo gedit /etc/apt/sources.list
+2.更新源
+sudo apt update 
+3.安装编译工具
+sudo apt install gcc-4.8 g++-4.8 python2.7-dev build-essential -y
+4.配置
+tar -zxf boost_1_66_0.tar.gz
+cd boost_1_66_0/
+./bootstrap.sh --with-python=/usr/bin/python2.7
+5.编译
+sudo ./b2 install --toolset=gcc-4.8 --with-python include='/usr/include/python2.7' --with-thread --with-date_time --with-chrono
+6.复制API库文件
+cd ~
+unzip xtp_api_python-master.zip
+sudo cp ~/xtp_api_python-master/bin/Linux/Linux+python2.7/libxtp* /usr/local/lib/
+7.重新载入库文件
+sudo ldconfig
+8.复制库文件
+cp ~/xtp_api_python-master/bin/Linux/Linux+python2.7/vnxtp* ~/xtp_api_python-master/bin/test/
+9.运行测试文件
+python2.7 ~/xtp_api_python-master/bin/test/quotetest.py
+python2.7 ~/xtp_api_python-master/bin/test/tradertest.py
