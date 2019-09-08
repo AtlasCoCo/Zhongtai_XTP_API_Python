@@ -18,6 +18,7 @@ sudo apt update
 3.安装编译工具
 sudo apt install gcc-4.8 g++-4.8 python3.6-dev build-essential -y
 4.配置
+wget https://dl.bintray.com/boostorg/release/1.66.0/source/boost_1_66_0.tar.gz
 tar -zxf boost_1_66_0.tar.gz
 cd boost_1_66_0/
 ./bootstrap.sh --with-python=/usr/bin/python3
@@ -25,6 +26,7 @@ cd boost_1_66_0/
 sudo ./b2 install --toolset=gcc-4.8 --with-python include='/usr/include/python3.6m' --with-thread --with-date_time --with-chrono
 6.复制API库文件
 cd ~
+wget https://github.com/ztsec/xtp_api_python/archive/master.zip
 unzip xtp_api_python-master.zip
 sudo cp ~/xtp_api_python-master/bin/Linux/Linux+python3.6/libxtp* /usr/local/lib/
 7.重新载入库文件
